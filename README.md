@@ -25,14 +25,10 @@ library(sidora.core)
 con <- get_pandora_connection(".credentials")
 ```
 
-You can access individual tables either by establishing a DBI connection (`get_con()`) to them or by downloading them as a data.frame (`get_df()`). You'll probably not need the former, which is only relevant if you want to interact with the database server directly.
-
-`get_df()` does three additional things: It transforms the columns of the downloaded table to the correct data type (with `enforce_types()`), it adds a table name prefix to each column name and it caches the downloaded table locally. The default is a per-R-session cache, but you can cache more permanently by changing the `cache_dir` and `cache_max_age` parameters.
+To download a table, you need to need to use `get_df()`. `get_df()` does three main things: It transforms the columns of the downloaded table to the correct data type (with `enforce_types()`), it adds a table name prefix to each column name (allowing understandable merging of tables) and it caches the downloaded table locally. The default is a per-R-session cache, but you can cache more permanently by changing the `cache_dir` and `cache_max_age` parameters.
 
 ```
-# get DBI connection
-get_con("TAB_Site", con)
-# get a local data.frame 
+# get a local data.frame (in tidyverse's tibble form)
 sites <- get_df("TAB_Site", con)
 ```
 
