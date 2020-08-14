@@ -37,7 +37,7 @@ NULL
 get_con <- function(tab = sidora.core::pandora_tables, con) {
   
   if (length(tab) != 1) {
-    stop("[sidora.core] error: Select one valid PANDORA SQL table.")
+    stop("[sidora.core] get_con() error: Select one valid PANDORA SQL table.")
   }
   
   # establish data connection
@@ -79,7 +79,7 @@ get_df <- function(
   cache = T, cache_dir = tempdir(), cache_max_age = 24 * 60 * 60) {
   
   if ( any(!tab %in% sidora.core::pandora_tables) )
-    stop(paste0("[sidora.core] error: tab not found in avaliable tables. Options: ",
+    stop(paste0("[sidora.core] get_df() error: tab not found in avaliable tables. Options: ",
                 paste(sidora.core::pandora_tables, collapse = ","),
                 ". Your selection: ", tab))
   
@@ -132,7 +132,7 @@ access_restricted_table <- function(tab, con){
   if ( any(!tab %in% sidora.core::pandora_tables_restricted) ) {
     stop(
       paste0(
-        "[sidora.core] error: tab not found in restricted table list. Options: ",
+        "[sidora.core] access_restricted_table() error: tab not found in restricted table list. Options: ",
         paste(sidora.core::pandora_tables_restricted, collapse = ","),
         ". Your selection: ", tab
       )
@@ -157,7 +157,7 @@ access_prejoined_data <- function(tab, con){
   if ( any(!tab %in% sidora.core::pandora_tables_prejoin) ) {
     stop(
       paste0(
-        "[sidora.core] error: tab not found in requires prejoining table list. Options: ",
+        "[sidora.core] access_prejoined_data() error: tab not found in requires prejoining table list. Options: ",
         paste(sidora.core::pandora_tables_prejoin, collapse = ","),
         ". Your selection: ", tab
       )
@@ -167,7 +167,7 @@ access_prejoined_data <- function(tab, con){
   ## Assumes con already generated
   if ( tab == "TAB_Analysis" ) {
     
-    message("[sidora.core] loading analysis may take a while, please be patient.")
+    message("[sidora.core] loading TAB_Analysis may take a while, please be patient.")
     
     # get connections to both tables
     ana_ids <- dplyr::tbl(con, tab)
